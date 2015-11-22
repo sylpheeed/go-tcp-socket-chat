@@ -1,21 +1,24 @@
 package tcp_server
 
 import (
-//	"bufio"
 	"log"
 	"net"
-	"github.com/sylpheeed/go-tcp-socket-chat/users"
 )
 
 // TCP server
 type server struct {
-	address string        // Address to open connection: localhost:9999
-	joins   chan net.Conn // Channel for new connections
+	address             string        // Address to open connection: localhost:9999
+	joins               chan net.Conn // Channel for new connections
+	onNewClientCallback func(conn net.Conn)
 }
 
 // Creates new User instance
 func (s *server) newClient(conn net.Conn) {
-	users.Create(conn)
+	s.onNewClientCallback(conn)
+}
+
+func (s *server) OnNewClientCallback(callback func(conn net.Conn)) {
+	s.onNewClientCallback = callback
 }
 
 // Listens new connections channel and creating new client
@@ -51,6 +54,8 @@ func New(address string) *server {
 		address: address,
 		joins:   make(chan net.Conn),
 	}
+
+	server.OnNewClientCallback(func(conn net.Conn) {})
 
 	return server
 }

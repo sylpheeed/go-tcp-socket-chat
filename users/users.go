@@ -10,7 +10,6 @@ type User struct {
 	connection net.Conn
 }
 
-
 type allUsers map[int]*User
 
 var AllUsers allUsers = make(allUsers, 0)
