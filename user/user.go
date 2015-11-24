@@ -2,7 +2,6 @@ package user
 import (
 	"net"
 	"bufio"
-	"strings"
 )
 
 type User struct {
@@ -38,16 +37,17 @@ func (u *User) listen() {
 			u.Quit()
 			return
 		}else {
+			message = message[:len(message) - 1]
 			u.newMessage(message)
 		}
 	}
 }
 
 func (u *User) newMessage(message string) {
-	message = strings.Replace(message, "\n", "", -1)
 	if u.Name == "" {
 		u.Name = message
 		u.Broadcast("New user " + u.Name + " is connected to chat")
+		u.Emit("Hi " + u.Name + " and welcome to chat!")
 	}else {
 		Users.Emit("[" + u.Name + "]: " + message)
 	}
