@@ -2,6 +2,7 @@ package user
 import (
 	"net"
 	"bufio"
+	"strings"
 )
 
 type User struct {
@@ -25,6 +26,7 @@ func (u *User) Emit(message string) {
 func (u *User) Quit() {
 	u.connection.Close()
 	delete(Users, u.Id)
+	u.userConnectionClose()
 }
 
 // Read client data from channel
@@ -34,6 +36,7 @@ func (u *User) listen() {
 		message, err := reader.ReadString('\n')
 		if err != nil {
 			u.Quit()
+			return
 		}else {
 			u.newMessage(message)
 		}
@@ -41,6 +44,7 @@ func (u *User) listen() {
 }
 
 func (u *User) newMessage(message string) {
+	message = strings.Replace(message, "\n", "", -1)
 	if u.Name == "" {
 		u.Name = message
 		u.Broadcast("New user " + u.Name + " is connected to chat")
