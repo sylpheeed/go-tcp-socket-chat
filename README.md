@@ -1,6 +1,6 @@
 # Go TCP socket chat
 
-This is example shows how to create simple chat based on TCP socket connection.
+This example shows how to create simple chat based on TCP socket connection.
 
 For testing you can use [Go TCP chat client](https://github.com/sylpheeed/go-tcp-socket-chat-client)
 
