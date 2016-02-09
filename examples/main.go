@@ -1,7 +1,7 @@
 package main
 import (
-	"github.com/sylpheeed/go-tcp-socket-chat/tcp_server"
-	"github.com/sylpheeed/go-tcp-socket-chat/user"
+	"github.com/sylpheeed/go-tcp-socket-chat"
+	"github.com/sylpheeed/go-tcp-socket-chat/examples/user"
 	"net"
 )
 
