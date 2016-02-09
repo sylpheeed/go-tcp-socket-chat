@@ -13,7 +13,7 @@ For testing you can use [Go TCP chat client](https://github.com/sylpheeed/go-tcp
 ### Usage:
 
 ``` bash
-> cd $GOPATH/src/github.com/sylpheeed/go-tcp-socket-chat
+> cd $GOPATH/src/github.com/sylpheeed/go-tcp-socket-chat/examples
 > go run main.go
 ```
 
